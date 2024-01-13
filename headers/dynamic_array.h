@@ -2,37 +2,39 @@
 #define DYNAMIC_ARRAY
 
 #define START_CAPACITY 5
-#define ERROR __INT_MAX__
+#define ERROR          __INT_MAX__
+
+typedef unsigned long int u64;
 
 typedef struct dynamic
 {
-    unsigned long int capacity;
-    unsigned long int length;
+    u64  capacity;
+    u64  length;
     int* array;
-}dynamic;
+}   dynamic;
 
-struct dynamic* init();
+struct dynamic* dyn_init();
 
-void free_dynamic(struct dynamic* dyn);
+void dyn_free(struct dynamic* dyn);
 
-int find(struct dynamic* dyn, int value);
+int dyn_find(struct dynamic* dyn, int value);
 
-unsigned long int len(struct dynamic* dyn);
+u64 dyn_len(struct dynamic* dyn);
 
-void append(struct dynamic* dyn, int value);
+void dyn_append(struct dynamic* dyn, int value);
 
-void print_dyn(struct dynamic* dyn, const char* format, const char* end);
+void dyn_print(struct dynamic* dyn, const char* format, const char* end);
 
-void print_reverse_dyn(struct dynamic* dyn, const char* format, const char* end);
+void dyn_reverse_print(struct dynamic* dyn, const char* format, const char* end);
 
-void insert(struct dynamic* dyn, int value, unsigned long int index);
+void dyn_insert(struct dynamic* dyn, int value, u64 index);
 
-void replace(struct dynamic* dyn, int value, unsigned long int index);
+void dyn_replace(struct dynamic* dyn, int value, u64 index);
 
-int get(struct dynamic* dyn, unsigned long int index);
+int dyn_get(struct dynamic* dyn, u64 index);
 
-void del(struct dynamic* dyn, unsigned long int index);
+void dyn_del(struct dynamic* dyn, u64 index);
 
-int* c_arr(struct dynamic* dyn);
+int* get_c_arr(struct dynamic* dyn);
 
 #endif

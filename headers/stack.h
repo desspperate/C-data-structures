@@ -5,26 +5,28 @@
 
 #include <stdbool.h>
 
+typedef unsigned long int u64;
+
 typedef struct stack
 {
-    unsigned long int length;
+    u64             length;
     struct dynamic* storage;
-}stack;
+}   stack;
 
-struct stack* init_stack();
+struct stack* stack_init();
 
-void push(struct stack* stack_, int value);
+void stack_push(struct stack* stack_, int value);
 
-static unsigned long int size(struct stack* stack_);
+static u64 stack_size(struct stack* stack_);
 
-int pop(struct stack* stack_);
+int stack_pop(struct stack* stack_);
 
-int peek(struct stack* stack_);
+int stack_peek(struct stack* stack_);
 
-bool is_empty(struct stack* stack_);
+bool stack_empty(struct stack* stack_);
 
-void print_stack(struct stack* stack_, const char* format, const char* end);
+void stack_print(struct stack* stack_, const char* format, const char* end);
 
-void destruct_stack(struct stack* stack_);
+void stack_destruct(struct stack* stack_);
 
 #endif

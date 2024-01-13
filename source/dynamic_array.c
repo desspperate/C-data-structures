@@ -4,43 +4,42 @@
 
 #include "../headers/dynamic_array.h"
 
-struct dynamic* init()
+struct dynamic* dyn_init()
 {
-    struct dynamic* dyn = (struct dynamic*)malloc(sizeof(struct dynamic));
+    struct dynamic* dyn;
+    dyn = (struct dynamic*)malloc(sizeof(struct dynamic));
+
     dyn->capacity = START_CAPACITY;
-    dyn->length = 0;
-    dyn->array = (int*)malloc(sizeof(int) * START_CAPACITY);
+    dyn->length   = 0;
+    dyn->array    = (int*)malloc(sizeof(int) * START_CAPACITY);
 
     return dyn;
 }
 
-void free_dynamic(struct dynamic* dyn)
+void dyn_free(struct dynamic* dyn)
 {
     free(dyn->array);
     free(dyn);
 }
 
-int find(struct dynamic* dyn, int value)
+int dyn_find(struct dynamic* dyn, int value)
 {
-    for (int i = 0; i  < dyn->length; i++)
-    {
+    for (int i = 0; i  < dyn->length; ++i) {
         if (*(dyn->array + i) == value)
-        {
             return i;
-        }
     }
+
     return ERROR;
 }
 
-unsigned long int len(struct dynamic* dyn)
+u64 dyn_len(struct dynamic* dyn)
 {
     return dyn->length;
 }
 
-void append(struct dynamic* dyn, int value)
+void dyn_append(struct dynamic* dyn, int value)
 {
-    if (dyn->length >= dyn->capacity)
-    {
+    if (dyn->length >= dyn->capacity) {
         dyn->capacity *= 2;
         dyn->array = (int*)realloc(dyn->array, sizeof(int) * dyn->capacity);
     }
@@ -49,34 +48,28 @@ void append(struct dynamic* dyn, int value)
     dyn->length++;
 }
 
-void print_dyn(struct dynamic* dyn, const char* format, const char* end)
+void dyn_print(struct dynamic* dyn, const char* format, const char* end)
 {
-    for (int i = 0; i < dyn->length; i++)
-    {
+    for (int i = 0; i < dyn->length; ++i) {
         printf(format, *(dyn->array + i));
     }
     printf("%s", end);
 }
 
-void print_reverse_dyn(struct dynamic* dyn, const char* format, const char* end)
+void dyn_reverse_print(struct dynamic* dyn, const char* format, const char* end)
 {
-    for (int i = dyn->length - 1; i >= 0; i--)
-    {
+    for (int i = dyn->length - 1; i >= 0; --i) {
         printf(format, *(dyn->array + i));
     }
     printf("%s", end);
 }
 
-void insert(struct dynamic* dyn, int value, unsigned long int index)
+void dyn_insert(struct dynamic* dyn, int value, u64 index)
 {
     if (index > dyn->length)
-    {
-        printf("Index not found\n");
         return;
-    }
 
-    if (dyn->length >= dyn->capacity)
-    {
+    if (dyn->length >= dyn->capacity) {
         dyn->capacity *= 2;
         dyn->array = (int*)realloc(dyn->array, sizeof(int) * dyn->capacity);
     }
@@ -87,36 +80,28 @@ void insert(struct dynamic* dyn, int value, unsigned long int index)
     dyn->length++;
 }
 
-void replace(struct dynamic* dyn, int value, unsigned long int index)
+void dyn_replace(struct dynamic* dyn, int value, u64 index)
 {
     if (index >= dyn->length)
-    {
-        printf("Index not found\n");
         return;
-    }
+
     *(dyn->array + index) = value; 
 }
 
-int get(struct dynamic* dyn, unsigned long int index)
+int dyn_get(struct dynamic* dyn, u64 index)
 {
     if (index >= dyn->length)
-    {
-        printf("Index not found\n");
         return ERROR;
-    }
+
     return *(dyn->array + index);
 }
 
-void del(struct dynamic* dyn, unsigned long int index)
+void dyn_del(struct dynamic* dyn, u64 index)
 {
     if (index >= dyn->length)
-    {
-        printf("Index not found\n");
         return;
-    }
 
-    if (dyn->length < dyn->capacity / 2)
-    {
+    if (dyn->length < dyn->capacity / 2) {
         dyn->capacity /= 2;
         dyn->array = (int*)realloc(dyn->array, sizeof(int) * dyn->capacity);
     }
@@ -126,9 +111,11 @@ void del(struct dynamic* dyn, unsigned long int index)
     dyn->length--;
 }
 
-int* c_arr(struct dynamic* dyn)
+int* get_c_arr(struct dynamic* dyn)
 {
-    int* arr = (int*)malloc(sizeof(int) * dyn->length);
+    int* arr;
+    arr = (int*)malloc(sizeof(int) * dyn->length);
+    
     memcpy((int*)arr, dyn->array, sizeof(int) * dyn->length); 
 
     return arr;

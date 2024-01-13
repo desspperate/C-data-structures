@@ -5,53 +5,55 @@
 #include "../headers/stack.h"
 #include "../headers/dynamic_array.h"
 
-struct stack* init_stack()
+struct stack* stack_init()
 {
-    struct stack* stack_ = (struct stack*)malloc(sizeof(struct stack));
+    struct stack* stack_;
+    stack_ = (struct stack*)malloc(sizeof(struct stack));
+
     stack_->length = 0;
-    stack_->storage = init();
+    stack_->storage = dyn_init();
 
     return stack_;
 }
 
-void push(struct stack* stack_, int value)
+void stack_push(struct stack* stack_, int value)
 {
-    append(stack_->storage, value);
+    dyn_append(stack_->storage, value);
     stack_->length++;
 }
 
-static unsigned long int size(struct stack* stack_)
+static u64 stack_size(struct stack* stack_)
 {
     return stack_->length;
 };
 
-int pop(struct stack* stack_)
+int stack_pop(struct stack* stack_)
 {
-    int value = get(stack_->storage, size(stack_) - 1);
-    del(stack_->storage, size(stack_) - 1);
+    int value = dyn_get(stack_->storage, stack_size(stack_) - 1);
+    dyn_del(stack_->storage, stack_size(stack_) - 1);
     
     stack_->length--;
 
     return value;
 }
 
-int peek(struct stack* stack_)
+int stack_peek(struct stack* stack_)
 {
-    return get(stack_->storage, size(stack_) - 1);
+    return dyn_get(stack_->storage, stack_size(stack_) - 1);
 }
 
-bool is_empty(struct stack* stack_)
+bool stack_empty(struct stack* stack_)
 {
-    return (size(stack_) == 0);
+    return (stack_size(stack_) == 0);
 }
 
-void print_stack(struct stack* stack_, const char* format, const char* end)
+void stack_print(struct stack* stack_, const char* format, const char* end)
 {
-    print_dyn(stack_->storage, format, end);
+    dyn_print(stack_->storage, format, end);
 }
 
-void destruct_stack(struct stack* stack_)
+void stack_destruct(struct stack* stack_)
 {
-    free_dynamic(stack_->storage);
+    dyn_free(stack_->storage);
     free(stack_);
 }

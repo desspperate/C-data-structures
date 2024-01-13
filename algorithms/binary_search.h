@@ -1,8 +1,10 @@
 #ifndef BINARY_SEARCH
-#define BYNARY_SEARCH
+#define BINARY_SEARCH
 
 #define NOT_FOUND -1
 
-int bin_search(int* arr, unsigned long int length, int value);
+typedef unsigned long int u64;
+
+int bin_search(int* arr, u64 length, int value);
 
 #endif

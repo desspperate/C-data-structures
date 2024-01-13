@@ -5,28 +5,30 @@
 
 #include "./dynamic_array.h"
 
+typedef unsigned long int u64;
+
 typedef struct queue
 {
-    unsigned long int length;
+    u64             length;
     struct dynamic* storage;
-}queue;
+}   queue;
 
-struct queue* init_queue();
+struct queue* queue_init();
 
-void destruct_queue(struct queue* queue_);
+void queue_destruct(struct queue* queue_);
 
-void print_queue(struct queue* queue_, char* format, char* end);
+void queue_print(struct queue* queue_, char* format, char* end);
 
-void push(struct queue* queue_, int value);
+void queue_push(struct queue* queue_, int value);
 
-static unsigned long int queue_size(struct queue* queue_);
+static u64 queue_size(struct queue* queue_);
 
-int back(struct queue* queue_);
+int queue_back(struct queue* queue_);
 
-int front(struct queue* queue_);
+int queue_front(struct queue* queue_);
 
-int pop(struct queue* queue_);
+int queue_pop(struct queue* queue_);
 
-bool empty(struct queue* queue_);
+bool queue_empty(struct queue* queue_);
 
 #endif

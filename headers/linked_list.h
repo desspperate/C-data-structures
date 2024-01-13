@@ -6,27 +6,27 @@
 typedef struct node
 {
     struct node* next;
-    int value;
-}node;
+    int          value;
+}   node;
 
-struct node* init_head();
+struct node* linked_init();
 
-static void destruct_node(struct node* node_);
+static void node_destruct(struct node* node_);
 
-void destruct_list(struct node** head);
+void linked_destruct(struct node** head);
 
-struct node* next(struct node* node_);
+struct node* node_next(struct node* node_);
 
-void append(struct node** head, int value_);
+void linked_append(struct node** head, int value_);
 
-void push(struct node** head, int value_);
+void linked_push(struct node** head, int value_);
 
-int pop(struct node** head);
+int linked_pop(struct node** head);
 
-int remove_last(struct node* head);
+int linked_remove_last(struct node* head);
 
-int remove_by_index(struct node** head, int index);
+int linked_remove_by_index(struct node** head, int index);
 
-void print_linked_list(struct node* head, const char* format, const char* end);
+void linked_print(struct node* head, const char* format, const char* end);
 
 #endif

@@ -4,58 +4,61 @@
 #include "../headers/queue.h"
 #include "../headers/dynamic_array.h"
 
-struct queue* init_queue()
+struct queue* queue_init()
 {
-    struct queue* queue_ = (struct queue*)malloc(sizeof(struct queue));
+    struct queue* queue_;
+    queue_ = (struct queue*)malloc(sizeof(struct queue));
+
     queue_->length = 0;
-    queue_->storage = init();
+    queue_->storage = dyn_init();
 
     return queue_;
 }
 
-void destruct_queue(struct queue* queue_)
+void queue_destruct(struct queue* queue_)
 {
-    free_dynamic(queue_->storage);
+    dyn_free(queue_->storage);
     free(queue_);
 }
 
-void print_queue(struct queue* queue_, char* format, char* end)
+void queue_print(struct queue* queue_, char* format, char* end)
 {
-    print_dyn(queue_->storage, format, end);
+    dyn_print(queue_->storage, format, end);
 }
 
-void push(struct queue* queue_, int value)
+void queue_push(struct queue* queue_, int value)
 {
-    insert(queue_->storage, value, 0);
+    dyn_insert(queue_->storage, value, 0);
     queue_->length++;
 }
 
-static unsigned long int queue_size(struct queue* queue_)
+static u64 queue_size(struct queue* queue_)
 {
     return queue_->length;
 }
 
-int pop(struct queue* queue_)
+int queue_pop(struct queue* queue_)
 {
-    int value = get(queue_->storage, queue_size(queue_) - 1);
-    del(queue_->storage, queue_size(queue_) - 1);
+    int value;
+    value = dyn_get(queue_->storage, queue_size(queue_) - 1);
+    dyn_del(queue_->storage, queue_size(queue_) - 1);
 
     queue_->length--;
 
     return value;
 }
 
-int back(struct queue* queue_)
+int queue_back(struct queue* queue_)
 {
-    return get(queue_->storage, 0);
+    return dyn_get(queue_->storage, 0);
 }
 
-int front(struct queue* queue_)
+int queue_front(struct queue* queue_)
 {
-    return get(queue_->storage, queue_size(queue_) - 1);
+    return dyn_get(queue_->storage, queue_size(queue_) - 1);
 }
 
-bool empty(struct queue* queue_)
+bool queue_empty(struct queue* queue_)
 {
     return (queue_size(queue_) == 0);
 }

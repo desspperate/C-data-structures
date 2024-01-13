@@ -4,24 +4,26 @@
 #include "./dynamic_array.h"
 #include <stdbool.h>
 
+typedef unsigned long int u64;
+
 typedef struct set
 {
-    unsigned long int size;
+    u64             size;
     struct dynamic* storage;
-}set;
+}   set;
 
-struct set* init_set();
+struct set* set_init();
 
-void destruct_set(struct set* set_);
+void set_destruct(struct set* set_);
 
-unsigned long int size_(struct set* set_);
+u64 set_size(struct set* set_);
 
-bool is_there(struct set* set_, int value);
+bool set_is_there(struct set* set_, int value);
 
-void add(struct set* set_, int value);
+void set_add(struct set* set_, int value);
 
-void rem(struct set* set_, int value);
+void set_rem(struct set* set_, int value);
 
-void print_set(struct set* set_, const char* format, const char* end);
+void set_print(struct set* set_, const char* format, const char* end);
 
 #endif
