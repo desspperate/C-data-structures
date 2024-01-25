@@ -4,7 +4,7 @@
 typedef struct pair
 {
     char* key;
-    int   value;
+    void* value;
 }   pair;
 
 typedef struct pair_node
@@ -22,9 +22,9 @@ void pair_list_destruct(struct pair_node** head);
 
 struct pair_node* pair_node_next(struct pair_node* node_);
 
-void pair_list_append(struct pair_node** head, const char* key, int value);
+void pair_list_append(struct pair_node** head, const char* key, void* value);
 
-void pair_list_push(struct pair_node** head, const char* key, int value);
+void pair_list_push(struct pair_node** head, const char* key, void* value);
 
 struct pair pair_list_pop(struct pair_node** head);
 

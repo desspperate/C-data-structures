@@ -34,7 +34,7 @@ struct pair_node* pair_node_next(struct pair_node* node_)
     return node_->next;
 }
 
-void pair_list_append(struct pair_node** head, const char* key, int value)
+void pair_list_append(struct pair_node** head, const char* key, void* value)
 {
     struct pair pair__;
     pair__.key = (char*)key;
@@ -56,7 +56,7 @@ void pair_list_append(struct pair_node** head, const char* key, int value)
     (*head)->tail = pair_node_next((*head)->tail);
 }
 
-void pair_list_push(struct pair_node** head, const char* key, int value)
+void pair_list_push(struct pair_node** head, const char* key, void* value)
 {
     struct pair       pair__ = { (char*)key , value };
     struct pair_node* node_;

@@ -1,7 +1,7 @@
 #ifndef HASH_MAP
 #define HASH_MAP
 
-#define NOT_FOUND      __INT_MAX__
+#define NOT_FOUND      NULL
 #define EXPAND_AT      60
 #define START_CAPACITY 20
 
@@ -41,10 +41,11 @@ void map_destruct(struct map* map_);
 
 static void map_rehash(struct map** map_);
 
-void map_put(struct map** map_, const char* key, int value);
+void map_put(struct map** map_, const char* key, void* value);
 
-int map_get(struct map* map_, const char* key);
+void* map_get(struct map* map_, const char* key);
 
 void map_print(struct map* map_, const char* format, const char* end);
+/*If the map_print function is not working correctly, just add the void pointer converter, here -> pair_list.c: line 119 tmp_node->pair_.value */
 
 #endif

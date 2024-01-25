@@ -114,7 +114,7 @@ static void map_rehash(struct map** map_)
     free(all_pairs);
 }
 
-void map_put(struct map** map_, const char* key, int value)
+void map_put(struct map** map_, const char* key, void* value)
 {
     if (((float)(*map_)->size / (float)(*map_)->capacity * 100) > EXPAND_AT)
         map_rehash(map_);
@@ -136,7 +136,7 @@ void map_put(struct map** map_, const char* key, int value)
     }
 }
 
-int map_get(struct map* map_, const char* key)
+void* map_get(struct map* map_, const char* key)
 {
     struct bucket*    bucket_;
     struct pair_node* tmp_node;
